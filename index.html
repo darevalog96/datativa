@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datativa | Transformamos Datos en Decisiones</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Montserrat & Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Custom Styles & Tailwind Config */
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #333333;
+        }
+        h1, h2, h3, h4, h5, h6, .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .datativa-blue { background-color: #0D2A4B; }
+        .datativa-orange { background-color: #F7931E; }
+        .text-datativa-blue { color: #0D2A4B; }
+        .text-datativa-orange { color: #F7931E; }
+        .border-datativa-orange { border-color: #F7931E; }
+
+        /* Carousel Styles */
+        .carousel-item {
+            display: none;
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="datativa-blue text-white text-xs p-2">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="#" class="hover:text-datativa-orange transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <span>|</span>
+                <span><i class="fas fa-phone-alt mr-1"></i> +(502) 2424-8000</span>
+                <span>|</span>
+                <span><i class="fas fa-envelope mr-1"></i> ventas@datativa.com</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN HEADER & NAVIGATION ===== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto flex justify-between items-center p-4">
+            <!-- Logo -->
+            <a href="#" class="font-montserrat font-extrabold text-2xl text-datativa-blue" onclick="showPage('page-inicio')">
+                DATATIVA
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex items-center space-x-6 font-montserrat font-semibold text-sm">
+                <li><a href="#" class="hover:text-datativa-orange transition-colors" onclick="showPage('page-inicio')">Inicio</a></li>
+                <li><a href="#" class="hover:text-datativa-orange transition-colors" onclick="showPage('page-nosotros')">Nosotros</a></li>
+                <li class="relative dropdown">
+                    <a href="#" class="hover:text-datativa-orange transition-colors" onclick="showPage('page-servicios')">Servicios <i class="fas fa-chevron-down text-xs"></i></a>
+                    <ul class="dropdown-menu absolute bg-white shadow-lg mt-2 py-2 rounded-lg w-60">
+                        <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-datativa-orange">Data Warehousing</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-datativa-orange">Dashboards & Visualización</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-datativa-orange">Business Intelligence & Estrategia</a></li>
+                        <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-datativa-orange">Consultoría de Datos</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="hover:text-datativa-orange transition-colors" onclick="showPage('page-propuesta')">Propuesta de Valor</a></li>
+                <li><a href="#" class="hover:text-datativa-orange transition-colors" onclick="showPage('page-blog')">Blog</a></li>
+                <li><a href="#" class="datativa-orange text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity" onclick="showPage('page-contacto')">Contacto</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <i class="fas fa-bars text-2xl text-datativa-blue"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white p-4">
+            <a href="#" class="block py-2 font-semibold" onclick="showPage('page-inicio')">Inicio</a>
+            <a href="#" class="block py-2 font-semibold" onclick="showPage('page-nosotros')">Nosotros</a>
+            <a href="#" class="block py-2 font-semibold" onclick="showPage('page-servicios')">Servicios</a>
+            <a href="#" class="block py-2 font-semibold" onclick="showPage('page-propuesta')">Propuesta de Valor</a>
+            <a href="#" class="block py-2 font-semibold" onclick="showPage('page-blog')">Blog</a>
+            <a href="#" class="block mt-2 text-center datativa-orange text-white px-4 py-2 rounded-full" onclick="showPage('page-contacto')">Contacto</a>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- ===== PAGE: INICIO ===== -->
+        <div id="page-inicio" class="page-content">
+            <!-- Hero Carousel -->
+            <section id="hero-carousel" class="relative h-96 md:h-[500px] w-full overflow-hidden">
+                <!-- Slide 1 -->
+                <div class="carousel-item active h-full bg-cover bg-center" style="background-image: url('https://placehold.co/1920x600/0D2A4B/FFFFFF?text=Equipo+Analizando+Datos');">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white p-4">
+                            <h1 class="text-4xl md:text-6xl font-extrabold font-montserrat">Transformamos Datos en Decisiones</h1>
+                            <p class="mt-4 text-lg md:text-xl">Llevamos la Inteligencia de Negocios a las empresas de Guatemala.</p>
+                            <button class="mt-8 datativa-orange text-white px-6 py-3 rounded-full font-bold hover:opacity-90 transition-opacity" onclick="showPage('page-servicios')">Conoce Nuestros Servicios</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item h-full bg-cover bg-center" style="background-image: url('https://placehold.co/1920x600/334155/FFFFFF?text=Dashboard+Interactivo');">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white p-4">
+                            <h1 class="text-4xl md:text-6xl font-extrabold font-montserrat">Claridad Absoluta. Resultados Medibles.</h1>
+                            <p class="mt-4 text-lg md:text-xl">Visualiza tus KPIs más importantes en tiempo real.</p>
+                            <button class="mt-8 datativa-orange text-white px-6 py-3 rounded-full font-bold hover:opacity-90 transition-opacity" onclick="showPage('page-servicios')">Ver Soluciones</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item h-full bg-cover bg-center" style="background-image: url('https://placehold.co/1920x600/1E293B/FFFFFF?text=Red+de+Datos');">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white p-4">
+                            <h1 class="text-4xl md:text-6xl font-extrabold font-montserrat">Tu Información, Centralizada y Segura.</h1>
+                            <p class="mt-4 text-lg md:text-xl">Diseñamos y construimos el Data Warehouse que tu empresa necesita.</p>
+                            <button class="mt-8 datativa-orange text-white px-6 py-3 rounded-full font-bold hover:opacity-90 transition-opacity" onclick="showPage('page-contacto')">Hablemos de tu Proyecto</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Intro Section -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-3xl font-bold text-datativa-blue font-montserrat">Tu Socio Estratégico en Datos en Guatemala</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-gray-600">En Datativa, convertimos el potencial oculto en tus datos en tu mayor ventaja competitiva. Dejamos atrás las hojas de cálculo confusas para dar paso a una fuente única de verdad, ayudándote a tomar decisiones más rápidas, seguras y rentables.</p>
+                </div>
+            </section>
+
+            <!-- Services Overview -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center text-datativa-blue font-montserrat">Soluciones Diseñadas para tu Crecimiento</h2>
+                    <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Service Card 1 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-transform">
+                            <i class="fas fa-database text-4xl text-datativa-orange"></i>
+                            <h3 class="font-bold text-xl mt-4 font-montserrat">Data Warehousing</h3>
+                            <p class="mt-2 text-gray-600 text-sm">Centralizamos y estructuramos toda tu información en una fuente única, segura y confiable.</p>
+                        </div>
+                        <!-- Service Card 2 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-transform">
+                            <i class="fas fa-chart-bar text-4xl text-datativa-orange"></i>
+                            <h3 class="font-bold text-xl mt-4 font-montserrat">Dashboards & Visualización</h3>
+                            <p class="mt-2 text-gray-600 text-sm">Convertimos tus números en dashboards interactivos y fáciles de entender para un monitoreo en tiempo real.</p>
+                        </div>
+                        <!-- Service Card 3 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-transform">
+                            <i class="fas fa-brain text-4xl text-datativa-orange"></i>
+                            <h3 class="font-bold text-xl mt-4 font-montserrat">Business Intelligence</h3>
+                            <p class="mt-2 text-gray-600 text-sm">Vamos más allá de los reportes para entregarte los insights que necesitas para optimizar y crecer.</p>
+                        </div>
+                        <!-- Service Card 4 -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl hover:-translate-y-2 transition-transform">
+                            <i class="fas fa-users-cog text-4xl text-datativa-orange"></i>
+                            <h3 class="font-bold text-xl mt-4 font-montserrat">Consultoría de Datos</h3>
+                            <p class="mt-2 text-gray-600 text-sm">Te guiamos en cada paso para crear una cultura basada en datos, desde la estrategia hasta la implementación.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PAGE: NOSOTROS ===== -->
+        <div id="page-nosotros" class="page-content hidden">
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl font-bold text-center text-datativa-blue font-montserrat">Potenciando Empresas Guatemaltecas con Datos</h1>
+                    <div class="mt-12 grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <img src="https://placehold.co/600x400/E2E8F0/334155?text=Nuestro+Equipo" alt="Equipo de Datativa" class="rounded-lg shadow-lg">
+                        </div>
+                        <div>
+                            <p class="text-gray-700 mb-4">En Datativa, somos más que consultores; somos arquitectos de claridad. Nacimos de la convicción de que las decisiones más audaces se toman con la información correcta. Nuestra pasión es sumergirnos en la complejidad de los datos para emerger con soluciones simples, elegantes y poderosas.</p>
+                            <p class="text-gray-700">Con un profundo conocimiento del mercado guatemalteco, entendemos los desafíos únicos que enfrentan las empresas aquí. Por eso, no ofrecemos soluciones genéricas. Creamos estrategias a la medida que se integran perfectamente con tus operaciones y cultura, asegurando una adopción exitosa y un impacto duradero.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h2 class="text-3xl font-bold text-datativa-blue font-montserrat">Nuestra Misión</h2>
+                        <p class="mt-4 text-gray-600">Democratizar el uso de la inteligencia de negocios para las empresas en Guatemala, proveyendo las herramientas y la estrategia necesarias para que conviertan sus datos en su activo más valioso y su principal ventaja competitiva.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h2 class="text-3xl font-bold text-datativa-blue font-montserrat">Nuestra Visión</h2>
+                        <p class="mt-4 text-gray-600">Ser la consultora de datos líder y el socio de confianza para la innovación en Guatemala, reconocida por generar un crecimiento medible y sostenible para nuestros clientes a través de la inteligencia de negocios.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ===== PAGE: SERVICIOS ===== -->
+        <div id="page-servicios" class="page-content hidden">
+             <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl font-bold text-center text-datativa-blue font-montserrat">Nuestras Soluciones de Datos</h1>
+                    <p class="mt-4 text-center max-w-3xl mx-auto text-gray-600">Ofrecemos un portafolio completo de servicios para acompañarte en cada etapa de tu viaje hacia una cultura basada en datos. Desde la fundación técnica hasta la estrategia avanzada.</p>
+                    
+                    <div class="mt-16 space-y-12">
+                        <!-- Service Detail 1 -->
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                            <img src="https://placehold.co/600x400/E2E8F0/334155?text=Data+Warehouse" alt="Data Warehouse" class="rounded-lg shadow-lg">
+                            <div>
+                                <h2 class="text-3xl font-bold text-datativa-blue font-montserrat">Data Warehousing</h2>
+                                <p class="mt-4 text-gray-600">Construimos la columna vertebral de tu estrategia de datos. Diseñamos y desarrollamos repositorios de datos centralizados que integran información de todas tus fuentes (ERP, CRM, ventas, etc.) en un solo lugar, creando una fuente única de verdad para toda tu organización.</p>
+                            </div>
+                        </div>
+                        <!-- Service Detail 2 -->
+                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                             <div class="md:order-2">
+                                <img src="https://placehold.co/600x400/E2E8F0/334155?text=Dashboards" alt="Dashboards" class="rounded-lg shadow-lg">
+                            </div>
+                            <div class="md:order-1">
+                                <h2 class="text-3xl font-bold text-datativa-blue font-montserrat">Dashboards & Visualización</h2>
+                                <p class="mt-4 text-gray-600">Transformamos hojas de cálculo y números complejos en historias visuales claras y accionables. Creamos dashboards interactivos en herramientas como Power BI y Tableau, permitiéndote explorar tus datos, identificar tendencias y monitorear tus KPIs en tiempo real con solo unos clics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PAGE: PROPUESTA DE VALOR ===== -->
+        <div id="page-propuesta" class="page-content hidden">
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-4xl font-bold text-datativa-blue font-montserrat">Más que un Proveedor, un Socio Estratégico</h1>
+                    <p class="mt-4 max-w-3xl mx-auto text-gray-600">El valor real de trabajar con Datativa va más allá de la tecnología. Nos comprometemos con tu éxito y nos enfocamos en lo que realmente importa: tu crecimiento.</p>
+                    
+                    <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+                        <div class="border-t-4 border-datativa-orange bg-gray-50 p-6 rounded-lg shadow-md">
+                            <i class="fas fa-hand-holding-usd text-3xl text-datativa-blue mb-4"></i>
+                            <h3 class="font-bold text-xl font-montserrat">Enfoque en ROI</h3>
+                            <p class="mt-2 text-sm text-gray-600">Cada proyecto está diseñado para generar un impacto medible en tu rentabilidad, ya sea optimizando costos, aumentando ventas o mejorando la eficiencia.</p>
+                        </div>
+                        <div class="border-t-4 border-datativa-orange bg-gray-50 p-6 rounded-lg shadow-md">
+                            <i class="fas fa-map-marker-alt text-3xl text-datativa-blue mb-4"></i>
+                            <h3 class="font-bold text-xl font-montserrat">Conocimiento Local</h3>
+                            <p class="mt-2 text-sm text-gray-600">Entendemos los desafíos y oportunidades del mercado guatemalteco. Ofrecemos soluciones que realmente funcionan aquí.</p>
+                        </div>
+                        <div class="border-t-4 border-datativa-orange bg-gray-50 p-6 rounded-lg shadow-md">
+                            <i class="fas fa-cogs text-3xl text-datativa-blue mb-4"></i>
+                            <h3 class="font-bold text-xl font-montserrat">Soluciones a la Medida</h3>
+                            <p class="mt-2 text-sm text-gray-600">Escuchamos tus necesidades y diseñamos soluciones personalizadas, asegurando que la tecnología se adapte a tu negocio, y no al revés.</p>
+                        </div>
+                        <div class="border-t-4 border-datativa-orange bg-gray-50 p-6 rounded-lg shadow-md">
+                            <i class="fas fa-lightbulb text-3xl text-datativa-blue mb-4"></i>
+                            <h3 class="font-bold text-xl font-montserrat">Empoderamiento</h3>
+                            <p class="mt-2 text-sm text-gray-600">Nuestro objetivo es que tomes tus propias decisiones. Incluimos capacitación y soporte para que tu equipo desarrolle una cultura analítica.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PAGE: BLOG ===== -->
+        <div id="page-blog" class="page-content hidden">
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl font-bold text-center text-datativa-blue font-montserrat">Blog de Datativa: Insights y Tendencias</h1>
+                    <p class="mt-4 text-center max-w-3xl mx-auto text-gray-600">Explora nuestros artículos sobre estrategia de datos, inteligencia de negocios y las últimas tendencias tecnológicas para empresas en Guatemala.</p>
+
+                    <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Blog Post Card 1 -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <img src="https://placehold.co/600x400/CBD5E1/334155?text=Excel+vs+Data+Warehouse" alt="Blog post image" class="w-full h-48 object-cover group-hover:opacity-80 transition-opacity">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl font-montserrat text-datativa-blue">5 Señales de que tu Empresa Necesita un Data Warehouse</h3>
+                                <p class="mt-3 text-sm text-gray-600">¿Pasas más tiempo preparando reportes que analizándolos? Descubre si es hora de dejar atrás las hojas de cálculo y dar el siguiente paso...</p>
+                                <a href="#" class="inline-block mt-4 text-datativa-orange font-bold hover:underline">Leer Más &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Blog Post Card 2 -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <img src="https://placehold.co/600x400/CBD5E1/334155?text=Dashboard+de+Ventas" alt="Blog post image" class="w-full h-48 object-cover group-hover:opacity-80 transition-opacity">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl font-montserrat text-datativa-blue">Cómo un Dashboard en Power BI Transforma tu Gestión de Ventas</h3>
+                                <p class="mt-3 text-sm text-gray-600">De datos crudos a decisiones clave. Te mostramos un antes y un después de cómo visualizar tus ventas para potenciar tus resultados...</p>
+                                <a href="#" class="inline-block mt-4 text-datativa-orange font-bold hover:underline">Leer Más &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Blog Post Card 3 -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
+                            <img src="https://placehold.co/600x400/CBD5E1/334155?text=PYMES+y+Datos" alt="Blog post image" class="w-full h-48 object-cover group-hover:opacity-80 transition-opacity">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl font-montserrat text-datativa-blue">Business Intelligence no es solo para Corporaciones</h3>
+                                <p class="mt-3 text-sm text-gray-600">Rompiendo el mito: 3 formas prácticas en que las PYMES en Guatemala pueden competir y ganar utilizando sus propios datos...</p>
+                                <a href="#" class="inline-block mt-4 text-datativa-orange font-bold hover:underline">Leer Más &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PAGE: CONTACTO ===== -->
+        <div id="page-contacto" class="page-content hidden">
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl font-bold text-center text-datativa-blue font-montserrat">Hablemos de tu Proyecto</h1>
+                    <p class="mt-4 text-center max-w-3xl mx-auto text-gray-600">Estamos listos para ayudarte a liberar el potencial de tus datos. Completa el formulario o contáctanos directamente.</p>
+                    
+                    <div class="mt-12 grid md:grid-cols-2 gap-12 bg-gray-50 p-8 rounded-lg shadow-md">
+                        <!-- Contact Form -->
+                        <div>
+                            <form>
+                                <div class="mb-4">
+                                    <label for="name" class="block text-sm font-bold mb-2">Nombre Completo</label>
+                                    <input type="text" id="name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-datativa-orange">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="empresa" class="block text-sm font-bold mb-2">Empresa</label>
+                                    <input type="text" id="empresa" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-datativa-orange">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="email" class="block text-sm font-bold mb-2">Correo Electrónico</label>
+                                    <input type="email" id="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-datativa-orange">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="block text-sm font-bold mb-2">Mensaje</label>
+                                    <textarea id="message" rows="4" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-datativa-orange" placeholder="Cuéntanos sobre tu desafío o proyecto..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full datativa-orange text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition-opacity">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                        <!-- Contact Info -->
+                        <div class="space-y-6">
+                             <h3 class="text-2xl font-bold font-montserrat text-datativa-blue">Información de Contacto</h3>
+                             <div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-2xl text-datativa-orange mr-4"></i>
+                                    <span>Av. Reforma, Zona 10, Ciudad de Guatemala</span>
+                                </div>
+                             </div>
+                             <div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone-alt text-2xl text-datativa-orange mr-4"></i>
+                                    <span>+(502) 2424-8000</span>
+                                </div>
+                             </div>
+                             <div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-envelope text-2xl text-datativa-orange mr-4"></i>
+                                    <span>ventas@datativa.com</span>
+                                </div>
+                             </div>
+                             <div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-2xl text-datativa-orange mr-4"></i>
+                                    <span>Lunes a Viernes de 9:00 a 18:00</span>
+                                </div>
+                             </div>
+                             <div class="mt-6 h-64 bg-gray-300 rounded-lg">
+                                <!-- Placeholder for Google Maps -->
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.026993339086!2d-90.51599318515995!3d14.60074198980182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a213b15a9955%3A0x584f4b1e33d4638!2sAvenida%20La%20Reforma!5e0!3m2!1sen!2sgt!4v1678886400000!5m2!1sen!2sgt" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg"></iframe>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+    
+    <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+    <a href="https://wa.me/50200000000?text=Hola%20Datativa,%20me%20gustaría%20solicitar%20más%20información%20sobre%20sus%20servicios." target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors">
+        <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="datativa-blue text-white pt-12 pb-6">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Column 1: Logo & Desc -->
+                <div>
+                    <h3 class="font-montserrat font-extrabold text-2xl">DATATIVA</h3>
+                    <p class="mt-4 text-sm text-gray-300">Transformamos tus datos en decisiones estratégicas y tu mayor ventaja competitiva.</p>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-xl hover:text-datativa-orange"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-xl hover:text-datativa-orange"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="font-bold font-montserrat">Navegación</h4>
+                    <ul class="mt-4 space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-datativa-orange" onclick="showPage('page-nosotros')">Nosotros</a></li>
+                        <li><a href="#" class="hover:text-datativa-orange" onclick="showPage('page-servicios')">Servicios</a></li>
+                        <li><a href="#" class="hover:text-datativa-orange" onclick="showPage('page-blog')">Blog</a></li>
+                        <li><a href="#" class="hover:text-datativa-orange" onclick="showPage('page-contacto')">Contacto</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Contact Info -->
+                <div>
+                    <h4 class="font-bold font-montserrat">Contacto</h4>
+                    <ul class="mt-4 space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-2"></i><span>Av. Reforma, Zona 10, Guatemala</span></li>
+                        <li class="flex items-start"><i class="fas fa-phone-alt mt-1 mr-2"></i><span>+(502) 2424-8000</span></li>
+                        <li class="flex items-start"><i class="fas fa-envelope mt-1 mr-2"></i><span>ventas@datativa.com</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-6 text-center text-xs text-gray-400">
+                <p>&copy; 2025 Datativa. Todos los derechos reservados. | Política de Privacidad</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Simple Page Navigation ---
+        const pages = document.querySelectorAll('.page-content');
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo(0, 0); // Scroll to top on page change
+            mobileMenu.classList.add('hidden'); // Hide mobile menu on navigation
+        }
+
+        // --- Hero Carousel Logic ---
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let currentSlide = 0;
+        const slideInterval = 3000; // 3 seconds
+
+        function nextSlide() {
+            carouselItems[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % carouselItems.length;
+            carouselItems[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, slideInterval);
+    </script>
+
+</body>
+</html>
